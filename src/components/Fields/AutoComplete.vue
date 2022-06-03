@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    class="global-autocomplete-field mt-2"
+    class="global-autocomplete-field"
     autocapitalize="off"
     :class="className"
     v-bind="$attrs"
@@ -67,7 +67,7 @@ export default {
 @import "@/assets/styles/variables.scss";
 
 // autocomplete field
-.global-autocomplete-field {
+::v-deep .global-autocomplete-field {
   .v-input__slot {
     border: 1px solid #c5c6c7 !important;
     background-color: #FFF !important;

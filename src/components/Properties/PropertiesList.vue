@@ -1,13 +1,24 @@
 <template>
   <div class="properties-list-wrapper">
-    <div class=""></div>
+    <!----- Properties Header ----->
+    <div class="properties-header">
+      <h2 class="heading-h2">Singapore: 999 properties found</h2>
+      <div class="header-filters">
+        <Button type="primary">Popularity</Button>
+        <Button type="primary">Popularity</Button>
+        <Button type="primary">Popularity</Button>
+        <Button type="primary">Popularity</Button>
+      </div>
+    </div>
+    
+    <!----- Properties Results ----->
     <div 
       class="properties-container flex-space-between"
       v-for="(property, i) in 2"
       :key="i"
     >
-      <!-- Property Details -->
       <div class="flex-space-between">
+        <!-- Property Details -->
         <div class="property-details flex-nowrap">
           <PropertyImages/>
           <div class="details-container pl-4">
@@ -48,10 +59,13 @@
 </template>
 <script>
 import PropertyImages from "@/components/Images/PropertyImages"
+import Button from "@/components/Buttons/Button"
+
 export default {
   name: "PropertiesList",
   components: {
-    PropertyImages
+    PropertyImages,
+    Button
   }
 }
 </script>
@@ -62,13 +76,21 @@ export default {
   min-width: 750px;
 }
 
+.properties-header {
+  
+}
+
 .properties-container {
   background-color: #FFF;
   min-width: 100%;
   max-width: 100%;
   border-radius: 5px;
   padding: 1em;
-  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+
+  &:hover {
+    box-shadow: 0 0 0 4px #DDDDDD;
+  }
 }
 
 .property-details {
@@ -102,6 +124,7 @@ export default {
 }
 
 .price-details {
-  flex-shrink: 0; padding: 20px;
+  flex-shrink: 0; 
+  padding: 20px;
 }
 </style>

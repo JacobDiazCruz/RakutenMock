@@ -3,17 +3,39 @@
     :wrapper="{
       backgroundColor: '#002D63',
       border: '#DDDDDD',
-      minHeight: '70px'
+      maxHeight: '75px'
+    }"
+    :container="{
+      maxHeight: '75px'
     }"
   >
-    <div class="flex-space-between">
+    <div class="flex-space-between pt-3">
       <div class="flex-nowrap">
-        <AutoComplete 
-          class="search-autocomplete-field"
-        />
+        <v-autocomplete
+          class="global-autocomplete-field search-autocomplete-field"
+          autocapitalize="off"
+          placeholder="Singapore, Singapore"
+          :items="sampleItems"
+          v-bind="$attrs"
+          append-icon=""
+          solo
+          flat
+        >
+          <template v-slot:prepend-inner>
+            <div class="pl-3 pr-1">
+              <SearchIcon/>
+            </div>
+          </template>
+          <template v-slot:item="data">
+            <LocationIcon class="mr-2 mb-n1"/>
+            <div class="text-14">
+              {{ data.item }}
+            </div>
+          </template>
+        </v-autocomplete>
         <Button 
           type="secondary"
-          class="mt-2 ml-2 search-btn"
+          class="ml-2 search-btn"
         >Search</Button>
       </div>
     </div>
@@ -24,6 +46,8 @@ import MainLogo from "@/components/Icons/MainLogo"
 import FlexWrapper from "@/components/Wrappers/FlexWrapper"
 import AutoComplete from "@/components/Fields/AutoComplete"
 import Button from "@/components/Buttons/Button"
+import SearchIcon from "@/components/Icons/SearchIcon"
+import LocationIcon from "@/components/Icons/LocationIcon"
 
 export default {
   name: "TopMenu",
@@ -31,10 +55,15 @@ export default {
     MainLogo,
     FlexWrapper,
     AutoComplete,
+    SearchIcon,
+    LocationIcon,
     Button
   },
   data() {
     return {
+      sampleItems: [
+        'qwrqwr', 'qwrqwr', 'gsdgsdg'
+      ],
       itemsList: [
         {
           title: "English"
@@ -83,7 +112,19 @@ export default {
   min-width: 150px !important;
 }
 
-.search-autocomplete-field {
+::v-deep .search-autocomplete-field {
   min-width: 470px;
+
+  .v-input__slot {
+    min-height: 50px !important;
+  }
+
+  .v-input__control {
+    min-height: 0px !important;
+  }
+
+  .v-messages {
+    min-height: 0px !important;
+  }
 }
 </style>

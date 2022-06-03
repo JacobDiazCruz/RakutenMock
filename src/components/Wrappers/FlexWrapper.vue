@@ -4,14 +4,17 @@
     :style="{
       backgroundColor: wrapper.backgroundColor,
       border: border,
-      minHeight: wrapper.minHeight
+      height: wrapper.height,
+      minHeight: wrapper.minHeight,
+      maxHeight: wrapper.maxHeight
     }"
   >
     <div 
       class="flex-container"
       :style="{
         backgroundColor: container.backgroundColor,
-        minHeight: minHeight
+        minHeight: container.minHeight,
+        maxHeight: container.maxHeight
       }"
     >
       <slot></slot>
@@ -26,9 +29,10 @@ export default {
       default: ()=> {
         return {
           backgroundColor: "#FFF",
-          minHeight: "100vh",
+          height: "100vh",
           border: '0px',
-          padding: ""
+          padding: "",
+          maxHeight: ""
         }
       }
     },
@@ -41,7 +45,8 @@ export default {
           minHeight: "100vh",
           padding: "",
           width: "",
-          margin: "auto"
+          margin: "auto",
+          maxHeight: ""
         }
       }
     }
@@ -56,16 +61,15 @@ export default {
   z-index: 100;
   top: 0;
   position: sticky;
+  overflow: hidden;
 }
 
 .flex-container {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px 0;
+  margin: auto;
 
   @include minWidth(1264px) {
-    max-width: 1050px;
+    max-width: 1000px;
   }
 }
 </style>
