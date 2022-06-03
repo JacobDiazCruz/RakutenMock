@@ -3,11 +3,15 @@
     <!----- Properties Header ----->
     <div class="properties-header">
       <h2 class="heading-h2">Singapore: 999 properties found</h2>
-      <div class="header-filters">
-        <Button type="primary">Popularity</Button>
-        <Button type="primary">Popularity</Button>
-        <Button type="primary">Popularity</Button>
-        <Button type="primary">Popularity</Button>
+      <div class="header-filters mt-2 flex-nowrap">
+        <div 
+          v-for="(filter, filterKey) in headerFilters"
+          :key="filterKey"
+          class="flex-btn text-14"
+          :class="{ 'active' : filter.active }"
+        >
+          {{ filter.title }}
+        </div>
       </div>
     </div>
     
@@ -66,6 +70,28 @@ export default {
   components: {
     PropertyImages,
     Button
+  },
+  data() {
+    return {
+      headerFilters: [
+        {
+          title: "Popularity",
+          active: true
+        },
+        {
+          title: "Price (lowest first)",
+          active: false
+        },
+        {
+          title: "Reviews",
+          active: false
+        },
+        {
+          title: "Discount",
+          active: false
+        }
+      ]
+    }
   }
 }
 </script>
@@ -76,8 +102,24 @@ export default {
   min-width: 750px;
 }
 
-.properties-header {
-  
+.header-filters {
+  min-width: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  border-radius: 5px;
+
+  .flex-btn {
+    text-align: center;
+    padding: 1rem;
+    min-width: 11.75rem;
+    background-color: #FFF;
+    border-right: 1px solid #DDDDDD;
+  }
+
+  .active {
+    background-color: $primary !important;
+    color: #FFF;
+  }
 }
 
 .properties-container {
