@@ -1,0 +1,46 @@
+$bg-light-gray: #f2f3f5;
+$text-black-light: #545556;
+$text-black-dark: #b4b4c2;
+$text-blue-black: #031b4e;
+$text-black: #221d11;
+$bg-default: #f1f6f4;
+
+$bg-gray: #f5f5f5;
+
+$primary: #002D63;
+$tertiary: #444444;
+$blue: #6552de;
+$secondary: #00A1E6;
+$light: #FFF;
+
+$crimson: #272727;
+// 272727 202121
+// $crimson: #14142B;
+$pink: #ff9784;
+$peach: #F4744B;
+
+// dark mode themes
+$night-400: #15181c; 
+$night-300: #1c1f33;
+$night-500: #000;
+$night-border: rgb(47, 51, 54);
+
+$input: #f5f4f2;
+
+@mixin mobile($arg) {
+  @media screen and (max-width: $arg) {
+    @content;
+  }
+}
+
+@mixin customSize($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin minWidth($min) {
+  @media (min-width: $min) {
+    @content;
+  }
+}

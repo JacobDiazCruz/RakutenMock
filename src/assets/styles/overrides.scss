@@ -1,0 +1,224 @@
+@import "@/assets/styles/variables.scss";
+
+.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded) > .v-input__control > .v-input__slot, .v-text-field.v-text-field--enclosed .v-text-field__details {
+  padding: 0 0px !important;
+}
+
+.v-application ul, .v-application ol {
+  padding-left: 0px !important;
+}
+
+.primary-color {
+  color: $crimson;
+}
+
+.disable-color {
+  color: #D9D9DA;
+}
+
+.v-application p {
+  margin-bottom: 0 !important;
+}
+
+.answer-body, .question-body {
+  img {
+    width: 90% !important;
+  }
+}
+
+.v-list-item {
+  min-height: 30px !important;
+}
+
+// overlay
+.v-overlay__scrim {
+  background-color: rgba(36,36,36,1);
+}
+
+// modal dialog styles
+.v-dialog, .v-menu__content {
+  box-shadow: 1px 0 4px rgb(0 2 4 / 6%), 0 7px 18px rgb(1 1 1 / 8%) !important;
+}
+
+// snackbar alert
+.v-snack__wrapper.theme--dark {
+  background-color: #FFF !important;
+  color: #000 !important;
+}
+
+// success snackbar
+.success-snackbar {
+  .v-snack__wrapper.v-sheet.theme--dark {
+    border-left: 5px solid #3cc44b !important;
+  }
+}
+
+// snackbar shadow
+.v-sheet.v-snack__wrapper:not(.v-sheet--outlined) {
+  border: 0.5px solid rgba(118, 118, 118, 0.28) !important;
+  border-radius: 12px !important;
+  box-shadow: rgb(0 0 0 / 15%) 0px 10px 37px !important;
+}
+
+// error snackbar
+.error-snackbar {
+  .v-snack__wrapper.v-sheet.theme--dark {
+    border-left: 5px solid #d81e06 !important;
+  }
+}
+
+// special classes
+.center {
+  margin: auto !important;
+}
+
+.gradient-text {
+  -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(
+    -70deg
+    ,#ff872c,#f11d28);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+// FLEX classes
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mobile-flex-column {
+  @include mobile(999px) {
+    flex-direction: column;
+  }
+}
+
+// texts
+.uppercase {
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+
+// TEXT and FONTS
+.bold {
+  font-weight: 600;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.text-error {
+  color: #d81e06;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.border-top {
+  border-top: 1px solid #eee;
+}
+
+.border-right {
+  border-right: 1px solid #eee;
+}
+
+.border-left {
+  border-left: 1px solid #eee;
+}
+
+.ellipsis {
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  // -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
+  font-size: .90rem;
+}
+
+.ellipsis-2 {
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: .90rem;
+}
+
+.ellipsis-3 {
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: .90rem;
+}
+
+.error--text {
+  .v-messages__message {
+    color: #d81e06 !important;
+  }
+}
+
+// DIALOG MODAL
+.v-dialog.v-dialog--active.v-dialog--persistent {
+  background-color: #FFF !important;
+}
+
+.v-text-field--enclosed.error--text {
+  .v-input__slot {
+    border: 1px solid #d81e06 !important;
+    background-color: rgb(250, 233, 234) !important;
+  }
+}
+
+.v-input.global-autocomplete-field.v-input--is-disabled.theme--light.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-field--solo-flat.v-text-field--is-booted.v-text-field--enclosed.v-text-field--placeholder.v-select {
+  cursor: not-allowed !important;
+  .v-input__slot {
+    background-color: rgb(218, 218, 218) !important;
+    cursor: not-allowed !important;
+  }
+}
+
+// texts
+.heading-h1 {
+  font-size: 1.5rem;
+}
+
+.heading-h2 {
+  font-size: 1rem;
+}
+
+.heading-h3 {
+  font-size: 0.875rem;
+}
+
+.text-12 {
+  font-size: 0.75rem;
+}

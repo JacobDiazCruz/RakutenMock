@@ -1,0 +1,12 @@
+<template>
+    <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="65px" height="65px" viewBox="0 0 128 35" xml:space="preserve"><rect x="0" y="0" width="20%" height="20%" fill="transparent" />
+    <g><circle fill="#ff656d" cx="17.5" cy="17.5" r="17.5"/><animate attributeName="opacity" dur="1200ms" begin="0s" repeatCount="indefinite" keyTimes="0;0.167;0.5;0.668;1" values="0.3;1;1;0.3;0.3"/></g>
+    <g><circle fill="#ff656d" cx="110.5" cy="17.5" r="17.5"/><animate attributeName="opacity" dur="1200ms" begin="0s" repeatCount="indefinite" keyTimes="0;0.334;0.5;0.835;1" values="0.3;0.3;1;1;0.3"/></g>
+    <g><circle fill="#ff656d" cx="64" cy="17.5" r="17.5"/><animate attributeName="opacity" dur="1200ms" begin="0s" repeatCount="indefinite" keyTimes="0;0.167;0.334;0.668;0.835;1" values="0.3;0.3;1;1;0.3;0.3"/></g>
+    </svg>
+</template>s
+<script>
+export default {
+    name: 'PreLoader'
+}
+</script>

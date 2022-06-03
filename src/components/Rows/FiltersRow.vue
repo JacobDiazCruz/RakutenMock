@@ -1,0 +1,227 @@
+<template>
+  <div class="filters-row">
+    <div
+      class="filter-cards"
+      v-for="(filter, i) in filtersList"
+      :key="i"
+    >
+      <h2 class="heading-h3 mb-3">{{ filter.heading }}</h2>
+      <div v-if="filter.items.length <= 0">
+        <TextField
+          placeholder="e.g. Hilton, Ibis ..."
+        />
+      </div>
+      
+      <!-- Checkbox filters -->
+      <div v-if="filter.items.length">
+        <div
+          v-for="(item, itemKey) in filter.items"
+          :key="itemKey"
+          class="flex-space-between"
+        >
+          <v-checkbox
+            color="primary"
+            :label="item.title"
+          ></v-checkbox>
+          <p>{{ item.value }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import CardGroup from "@/components/Cards/CardGroup"
+import TextField from "@/components/Fields/TextField"
+
+export default {
+  name: "FiltersRow",
+  components: {
+    CardGroup,
+    TextField
+  },
+  data() {
+    return {
+      // Reviews data
+      filtersList: {
+        reviews: {
+          heading: 'Reviews',
+          items: [
+            {
+              selected: false,
+              title: "Excellent",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Very Good",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Good",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Fair",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Poor",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "No review",
+              value: 999
+            },
+          ]
+        },
+
+        starRatings: {
+          heading: "Star rating",
+          items: [
+            {
+              selected: false,
+              title: 5,
+              value: 999
+            },
+            {
+              selected: false,
+              title: 4,
+              value: 999
+            },
+            {
+              selected: false,
+              title: 3,
+              value: 999
+            },
+            {
+              selected: false,
+              title: 2,
+              value: 999
+            },
+            {
+              selected: false,
+              title: 1,
+              value: 999
+            },
+            {
+              selected: false,
+              title: 'No rating',
+              value: 999
+            },
+          ],
+        },
+
+        hotelName: {
+          heading: "Hotel name",
+          search: "",
+          items: []
+        },
+
+        reservations: {
+          heading: "Reservations",
+          items: [
+            {
+              selected: false,
+              title: "Free cancellation",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Book now, pay later",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Pay at hotel",
+              value: 999
+            }
+          ]
+        },
+
+        mealPlans: {
+          heading: "Meal plan",
+          items: [
+            {
+              selected: false,
+              title: "Room only",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Breakfast",
+              value: 999
+            },
+          ]
+        },
+
+        propertyType: {
+          heading: "Property type",
+          items: [
+            {
+              selected: false,
+              title: "Hotel",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Hostel / Backpacker accomodation",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Apartment",
+              value: 999
+            },
+          ]
+        },
+
+        facilities: {
+          heading: "Facilities",
+          items: [
+            {
+              selected: false,
+              title: "Swimming pool",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Internet access",
+              value: 999
+            },
+            {
+              selected: false,
+              title: "Non-smoking floor",
+              value: 999
+            },
+          ]
+        }
+      }
+    }
+  }
+}
+</script>
+<style scoped lang="scss">
+.filters-row {
+  margin-right: 1em;
+}
+
+.filter-cards {
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  max-width: 290px;
+  min-width: 290px;
+}
+
+::v-deep .v-input--checkbox {
+  margin-top: 0px;
+  .v-messages {
+    min-height: 0px;
+  }
+}
+</style>

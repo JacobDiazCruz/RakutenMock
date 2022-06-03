@@ -1,0 +1,8 @@
+<template>
+    <svg t="1629528838733" class="icon mr-6" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6167" width="21" height="21"><path d="M832 96H192c-52.935 0-96 43.065-96 96v640c0 52.935 43.065 96 96 96h640c52.935 0 96-43.065 96-96V192c0-52.935-43.065-96-96-96z m-640 64h640c17.645 0 32 14.355 32 32v160H160V192c0-17.645 14.355-32 32-32z m-32 672V416h192v448H192c-17.645 0-32-14.355-32-32z m672 32H416V416h448v416c0 17.645-14.355 32-32 32z" p-id="6168" fill="#1d1f21"></path></svg>
+</template>
+<script>
+export default {
+    name: 'TemplateIcon'
+}
+</script>
