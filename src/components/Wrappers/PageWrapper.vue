@@ -35,7 +35,7 @@ export default {
   padding: 20px 0;
 
   @include minWidth(1264px) {
-    max-width: 1050px;
+    max-width: 1100px;
   }
 }
 </style>

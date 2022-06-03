@@ -3,7 +3,7 @@
     <!----- Properties Header ----->
     <div class="properties-header">
       <h2 class="heading-h2">Singapore: 999 properties found</h2>
-      <div class="header-filters mt-2 flex-nowrap">
+      <div class="header-filters mt-2 flex-space-between">
         <div 
           v-for="(filter, filterKey) in headerFilters"
           :key="filterKey"
@@ -27,10 +27,9 @@
           <PropertyImages/>
           <div class="details-container pl-4">
             <h2 class="heading-h2">The Fullerton Bay Hotel</h2>
-            <p>80 Collyer quay, Marina Bay, Singapore, Singapore, 049326 (view map)</p>
-
-            <div class="mt-2">
-              <p>“Excellent boutique hotel. Great rooms in excellent location. Awesome vibe. Beautiful beac...</p>
+            <div class="text-12">80 Collyer quay, Marina Bay, Singapore, Singapore, 049326 (view map)</div>
+            <div class="mt-2 text-12 ellipsis">
+              “Excellent boutique hotel. Great rooms in excellent location. Awesome vibe. Beautiful beac...
             </div>
 
             <div class="flex-wrap mt-3">
@@ -110,15 +109,21 @@ export default {
 
   .flex-btn {
     text-align: center;
-    padding: 1rem;
-    min-width: 11.75rem;
+    cursor: pointer;
+    padding: 0.7rem;
+    min-width: 12.5rem;
     background-color: #FFF;
     border-right: 1px solid #DDDDDD;
+
+    &:nth-last-child(1) {
+      border-right: 0px solid #FFF;
+    }
   }
 
   .active {
     background-color: $primary !important;
     color: #FFF;
+    font-weight: 600;
   }
 }
 
@@ -131,12 +136,12 @@ export default {
   margin-top: 0.5em;
 
   &:hover {
-    box-shadow: 0 0 0 4px #DDDDDD;
+    box-shadow: 0 0 0 2px #DDDDDD;
   }
 }
 
 .property-details {
-  max-width: 85%;
+  max-width: 95%;
 }
 
 .labels-box {

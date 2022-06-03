@@ -3,7 +3,7 @@
     class="flex-wrapper"
     :style="{
       backgroundColor: wrapper.backgroundColor,
-      border: border,
+      border: wrapper.border,
       height: wrapper.height,
       minHeight: wrapper.minHeight,
       maxHeight: wrapper.maxHeight
@@ -69,7 +69,7 @@ export default {
   margin: auto;
 
   @include minWidth(1264px) {
-    max-width: 1000px;
+    max-width: 1030px;
   }
 }
 </style>

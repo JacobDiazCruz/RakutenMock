@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper backgroundColor="#E5E5E5">
+  <PageWrapper backgroundColor="#F5F5F5">
     <div class="home-container flex-nowrap">
       <FiltersRow/>
       <PropertiesList/>
