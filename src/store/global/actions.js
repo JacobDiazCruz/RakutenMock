@@ -1,9 +1,9 @@
 import axios from "axios"
 
 export default {
-  //GET
+  // GET REQUEST
   async getRequest(context, payload = {}) {
-    let accessToken = localStorage.getItem("accessToken")
+    let accessToken = null // get if any
 
     const config = {
       headers: {
@@ -20,9 +20,9 @@ export default {
     }
   },
 
-  //POST
+  // POST REQUEST
   async postRequest(context, payload = {}) {
-    let accessToken = localStorage.getItem("accessToken")
+    let accessToken = null // get if any
 
     const config = {
       headers: {
@@ -43,9 +43,9 @@ export default {
     }
   },
 
-  // PUT
+  // PUT REQUEST
   async putRequest(context, payload = {}) {
-    let accessToken = localStorage.getItem("accessToken")
+    let accessToken = null // get if any
 
     const config = {
       headers: {

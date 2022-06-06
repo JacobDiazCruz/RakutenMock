@@ -6,15 +6,15 @@ export default {
     return response
   },
 
-  async searchCityApi(context, cityCode) {
+  async searchPropertiesApi(context, cityCode) {
     const response = await context.dispatch('getRequest', {
       url: `https://heroku-newsletter-service.herokuapp.com/search/${cityCode}`
     }, { root: true })
     if (response.data.status != 400) {
-      context.commit("setCities", response.data.outlets.availability.results)
+      context.commit("setProperties", response.data.outlets.availability.results)
       return response
     } else {
-      context.commit("setCities", [])
+      context.commit("setProperties", [])
       return response.data.status
     }
   }

@@ -1,3 +1,3 @@
 export default {
-  getProperties: state => state.cities
+  getProperties: state => state.properties
 }

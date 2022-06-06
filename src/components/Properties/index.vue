@@ -116,22 +116,32 @@ export default {
   },
 
   mounted() {
-    eventBus.$on("setDependencies", ({
-      cityLabel, 
-      searchError, 
-      isLoading
-    }) => {
-      this.cityLabel = cityLabel + ':'
-      this.loadingProperties = isLoading
-      this.searchError = searchError
-    })
+    this.setDependencies()
   },
 
   methods: {
     ...mapActions("cities", [
       "autoSuggestApi",
-      "searchCityApi"
-    ])
+      "searchPropertiesApi"
+    ]),
+
+    /**
+     * @description eventBus triggered from @/components/Menus/SearchMenu
+     * @triggerFunction searchCity
+     * @return N/A
+     * @status Done 
+     */
+    setDependencies() {
+      eventBus.$on("setDependencies", ({
+        cityLabel, 
+        searchError, 
+        isLoading
+      }) => {
+        this.cityLabel = cityLabel + ':'
+        this.loadingProperties = isLoading
+        this.searchError = searchError
+      })
+    }
   }
 }
 </script>

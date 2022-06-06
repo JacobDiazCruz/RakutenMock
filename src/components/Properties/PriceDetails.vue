@@ -42,6 +42,11 @@ export default {
   },
 
   methods: {
+    /**
+     * @description compute displayRate and adjustedDisplayRate rate values
+     * @return string with total percentage
+     * @status Done 
+     */
     displayRate(pckge) {
       let origRate = pckge.displayRate.value
       let adjustedRate = pckge.adjustedDisplayRate.value

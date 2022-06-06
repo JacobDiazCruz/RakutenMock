@@ -1,5 +1,6 @@
 <template>
   <div class="details-container">
+    <!----- Title and description ----->
     <div class="flex-nowrap">
       <h2 class="heading-h2">{{ property.property.name }}</h2>
       <div class="flex-nowrap ratings-container">
@@ -10,7 +11,8 @@
     <div class="mt-2 text-12 ellipsis">
       {{ property.property.reviews ? property.property.reviews.summary.text : "" }}
     </div>
-
+    
+    <!----- Labels ----->
     <div class="flex-wrap mt-3">
       <div 
         class="text-12 flex-wrap"
@@ -71,6 +73,11 @@ export default {
   },
 
   methods: {
+    /**
+     * @description set display label based on filtered object keys
+     * @return filtered labels 
+     * @status Done 
+     */
     displayLabel(pckge) {
       let labels = [
         "Breakfast",

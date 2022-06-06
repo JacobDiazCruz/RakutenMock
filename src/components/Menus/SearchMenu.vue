@@ -84,7 +84,7 @@ export default {
   methods: {
     ...mapActions("cities", [
       "autoSuggestApi",
-      "searchCityApi"
+      "searchPropertiesApi"
     ]),
 
     async autoSuggest() {
@@ -96,6 +96,11 @@ export default {
       }
     },
 
+    /**
+     * @description search city's properties api call
+     * @return N/A
+     * @status Done 
+     */
     async searchCity() {
       if(this.cityCode) {
         eventBus.$emit("setDependencies", {
@@ -105,7 +110,7 @@ export default {
         })
         try {
           // API Call (from vuex actions)
-          const response = await this.searchCityApi(this.cityCode.cityCode)
+          const response = await this.searchPropertiesApi(this.cityCode.cityCode)
 
           // Response updates
           if(response != 400) {
