@@ -1,3 +1,3 @@
 export default {
-  mentorsList: []
+  cities: []
 }

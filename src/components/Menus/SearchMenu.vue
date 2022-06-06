@@ -60,6 +60,7 @@ import Button from "@/components/Buttons/Button"
 import SearchIcon from "@/components/Icons/SearchIcon"
 import LocationIcon from "@/components/Icons/LocationIcon"
 import axios from "axios"
+import { mapActions } from "vuex"
 
 export default {
   name: "TopMenu",
@@ -75,6 +76,7 @@ export default {
     return {
       cityCode: "",
       suggestedList: [],
+      searchList: [],
 
       // sample data
       sampleItems: [
@@ -98,19 +100,15 @@ export default {
   },
 
   methods: {
+    ...mapActions("cities", [
+      "autoSuggestApi",
+      "searchCityApi"
+    ]),
+
     async autoSuggest() {
       try {
-        const headers = {
-          "Access-Control-Allow-Origin": "*",
-          'Content-Type': 'application/json',
-        }
-        const res = await axios({
-          method: "GET",
-          url: `https://heroku-newsletter-service.herokuapp.com/autosuggest`,
-          headers: headers
-        })
-        console.log(res.data)
-        this.suggestedList = res.data
+        const response = await this.autoSuggestApi()
+        this.suggestedList = response.data
       } catch(err) {
         console.log(err)
       }
@@ -118,14 +116,8 @@ export default {
 
     async searchCity() {
       try {
-        const res = await axios({
-          method: "GET",
-          url: `https://heroku-newsletter-service.herokuapp.com/search/${this.cityCode}`,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-          }
-        })
+        const response = await this.searchCityApi()
+        this.searchList = response.data.outlets.availability.results
       } catch(err) {
         console.log(err)
       }
