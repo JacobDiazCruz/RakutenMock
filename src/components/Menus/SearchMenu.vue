@@ -17,7 +17,7 @@
           placeholder="Singapore, Singapore"
           :items="suggestedList"
           item-text="label"
-          item-value="cityCode"
+          return-object
           v-bind="$attrs"
           v-model="cityCode"
           append-icon=""
@@ -72,7 +72,7 @@ export default {
     LocationIcon,
     Button
   },
-  
+
   data() {
     return {
       cityCode: "",
@@ -98,23 +98,26 @@ export default {
 
     async searchCity() {
       if(this.cityCode) {
-        eventBus.$emit("setLoading", {
+        eventBus.$emit("setDependencies", {
+          cityLabel: this.cityCode.label,
           searchError: false,
           isLoading: true
         })
         try {
           // API Call (from vuex actions)
-          const response = await this.searchCityApi(this.cityCode)
+          const response = await this.searchCityApi(this.cityCode.cityCode)
 
           // Response updates
           if(response != 400) {
             this.searchList = response
-            eventBus.$emit("setLoading", {
+            eventBus.$emit("setDependencies", {
+              cityLabel: this.cityCode.label,
               searchError: false,
               isLoading: false
             })
           } else {
-            eventBus.$emit("setLoading", {
+            eventBus.$emit("setDependencies", {
+              cityLabel: this.cityCode.label,
               searchError: true,
               isLoading: false
             })

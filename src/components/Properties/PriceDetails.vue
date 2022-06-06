@@ -12,12 +12,12 @@
     <div class="sale-display">
       {{ displayRate(pckge) }}
     </div>
-    <div class="light-text text-12" style="display: flex; flex-direction: row-reverse; padding-right: 1rem;">
+    <div class="light-text text-12 avg-text">
       Nightly avg.
     </div>
     <div class="price-details">
       <div class="flex-space-between">
-        <span class="light-text text-12" style="margin-top: 9px; margin-right: 0.3rem; text-decoration: line-through" v-if="pckge.displayRate.value > pckge.adjustedDisplayRate.value">
+        <span class="light-text text-12 display-rate-text" v-if="pckge.displayRate.value > pckge.adjustedDisplayRate.value">
           SGD {{ pckge.displayRate.value }}
         </span>
         <h1 class="heading-h1">
@@ -92,5 +92,17 @@ export default {
   text-align: center;
   margin: 5.5rem 1rem auto auto;
   padding: 0 0.3rem;
+}
+
+.avg-text {
+  display: flex; 
+  flex-direction: row-reverse; 
+  padding-right: 1rem;
+}
+
+.display-rate-text {
+  margin-top: 0.5625rem; 
+  margin-right: 0.3rem;
+  text-decoration: line-through
 }
 </style>

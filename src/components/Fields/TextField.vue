@@ -68,7 +68,7 @@ export default {
     },
     borderColor: {
       type: String,
-      default: '#DADADA'
+      default: '#DDDDDD'
     },
     height: {
       type: String,
@@ -113,7 +113,7 @@ export default {
   .v-input__slot {
     width: 100% !important;
     height: 40px !important;
-    border: 1px solid #ccc;
+    border: 1px solid $light-gray;
     border-radius: 4px !important;
     background-color: #FFF !important;
     padding: 0 !important;

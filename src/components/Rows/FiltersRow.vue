@@ -1,6 +1,6 @@
 <template>
   <div class="filters-row">
-    <!-- Map -->
+    <!----- Map ----->
     <MapSection/>
 
     <div
@@ -9,17 +9,17 @@
       :key="i"
     >  
       <h2 class="heading-h3 mb-3">{{ filter.heading }}</h2>
-      <!-- Price filters -->
+      <!----- Price filters ----->
       <PriceFilterSection 
         v-if="filter.heading == 'Price per night'"
       />
 
-      <!-- Search filters -->
+      <!----- Search filters ----->
       <SearchFilterSection
-        v-if="filter.items.length <= 0"
+        v-if="filter.heading == 'Hotel name'"
       />
       
-      <!-- Checkbox filters -->
+      <!----- Checkbox filters ----->
       <div v-if="filter.items.length">
         <div
           v-for="(item, itemKey) in filter.items"

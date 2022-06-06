@@ -2,7 +2,11 @@
   <div class="properties-list-wrapper">
     <!----- Properties Header ----->
     <div class="properties-header">
-      <h2 class="heading-h2">Singapore: {{ getProperties.length }} properties found</h2>
+      <h2 class="heading-h2">
+        {{ cityLabel }}
+        {{ getProperties.length }} 
+        properties found
+      </h2>
       <div class="header-filters mt-2 flex-space-between">
         <div 
           v-for="(filter, filterKey) in headerFilters"
@@ -15,9 +19,10 @@
       </div>
     </div>
     
-    <!----- Properties Results ----->
+    <!----- Pre loader ----->
     <SkeletonLoader v-if="loadingProperties"/>
 
+    <!----- Properties list ----->
     <div
       class="properties-container flex-space-between"
       v-for="(property, i) in getProperties"
@@ -28,7 +33,7 @@
         :key="pckgeKey"
         class="flex-space-between properties-row"
       >
-        <!-- Property Details -->
+        <!----- Property Details ----->
         <div>
           <div class="property-details flex-nowrap">
             <PropertyImages
@@ -42,13 +47,15 @@
           </div>
         </div>
 
-        <!-- Prices and Reviews -->
+        <!----- Prices and Reviews ----->
         <PriceDetails
           :property="property"
           :pckge="pckge"
         />
       </div>
     </div>
+
+    <!----- Empty and Error messages ----->
     <EmptyDisplay v-if="!getProperties.length && !searchError" />
     <ErrorDisplay v-if="searchError"/>
   </div>
@@ -65,7 +72,7 @@ import PropertyDetails from "./PropertyDetails"
 import PriceDetails from "./PriceDetails"
 
 export default {
-  name: "PropertiesList",
+  name: "Properties",
   components: {
     PropertyImages,
     Button,
@@ -79,6 +86,7 @@ export default {
     return {
       loadingProperties: false,
       searchError: false,
+      cityLabel: "",
 
       headerFilters: [
         {
@@ -108,7 +116,12 @@ export default {
   },
 
   mounted() {
-    eventBus.$on("setLoading", ({searchError, isLoading}) => {
+    eventBus.$on("setDependencies", ({
+      cityLabel, 
+      searchError, 
+      isLoading
+    }) => {
+      this.cityLabel = cityLabel + ':'
       this.loadingProperties = isLoading
       this.searchError = searchError
     })
