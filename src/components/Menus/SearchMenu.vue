@@ -59,8 +59,8 @@ import AutoComplete from "@/components/Fields/AutoComplete"
 import Button from "@/components/Buttons/Button"
 import SearchIcon from "@/components/Icons/SearchIcon"
 import LocationIcon from "@/components/Icons/LocationIcon"
-import axios from "axios"
 import { mapActions } from "vuex"
+import eventBus from "@/plugins/event-bus"
 
 export default {
   name: "TopMenu",
@@ -72,30 +72,12 @@ export default {
     LocationIcon,
     Button
   },
+  
   data() {
     return {
       cityCode: "",
       suggestedList: [],
-      searchList: [],
-
-      // sample data
-      sampleItems: [
-        'qwrqwr', 'qwrqwr', 'gsdgsdg'
-      ],
-      itemsList: [
-        {
-          title: "English"
-        },
-        {
-          title: "USD"
-        },
-        {
-          title: "My Account"
-        },
-        {
-          title: "Log out"
-        }
-      ]
+      searchList: []
     }
   },
 
@@ -115,11 +97,31 @@ export default {
     },
 
     async searchCity() {
-      try {
-        const response = await this.searchCityApi(this.cityCode)
-        this.searchList = response.data.outlets.availability.results
-      } catch(err) {
-        console.log(err)
+      if(this.cityCode) {
+        eventBus.$emit("setLoading", {
+          searchError: false,
+          isLoading: true
+        })
+        try {
+          // API Call (from vuex actions)
+          const response = await this.searchCityApi(this.cityCode)
+
+          // Response updates
+          if(response != 400) {
+            this.searchList = response
+            eventBus.$emit("setLoading", {
+              searchError: false,
+              isLoading: false
+            })
+          } else {
+            eventBus.$emit("setLoading", {
+              searchError: true,
+              isLoading: false
+            })
+          }
+        } catch(err) {
+          console.log(err)
+        }
       }
     }
   }

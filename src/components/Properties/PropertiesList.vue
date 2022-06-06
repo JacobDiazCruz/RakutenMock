@@ -2,7 +2,7 @@
   <div class="properties-list-wrapper">
     <!----- Properties Header ----->
     <div class="properties-header">
-      <h2 class="heading-h2">Singapore: 999 properties found</h2>
+      <h2 class="heading-h2">Singapore: {{ getProperties.length }} properties found</h2>
       <div class="header-filters mt-2 flex-space-between">
         <div 
           v-for="(filter, filterKey) in headerFilters"
@@ -16,9 +16,11 @@
     </div>
     
     <!----- Properties Results ----->
-    <div 
+    <SkeletonLoader v-if="loadingProperties"/>
+
+    <div
       class="properties-container flex-space-between"
-      v-for="(property, i) in getCities"
+      v-for="(property, i) in getProperties"
       :key="i"
     >
       <div
@@ -33,100 +35,51 @@
               :heroImage="property.property.heroImage.url"
               :gallery="property.property.gallery"
             />
-            <div class="details-container">
-              <h2 class="heading-h2">{{ property.property.name }}</h2>
-              <div class="text-12">80 Collyer quay, Marina Bay, Singapore, Singapore, 049326 (view map)</div>
-              <div class="mt-2 text-12 ellipsis">
-                {{ property.property.reviews ? property.property.reviews.summary.text : "" }}
-              </div>
-
-              <div class="flex-wrap mt-3">
-                <div 
-                  class="text-12 flex-wrap"
-                >
-                  <div
-                    v-for="(label, labelKey) in displayLabel(pckge).slice(0, 3)"
-                    :key="labelKey"
-                    class="labels-box"
-                  >
-                    {{ label }}
-                  </div>
-                  <div 
-                    v-if="displayLabel(pckge).length > 3 "
-                    class="labels-box"
-                  >
-                    <v-tooltip bottom class="tooltip-top">
-                      <template v-slot:activator="{ on, attrs }">
-                        <span
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          + {{ displayLabel(pckge).length - 3 }}
-                        </span>
-                      </template>
-                      <div class="flex-wrap">
-                        <div 
-                          v-for="(label, labelKey) in displayLabel(pckge)" 
-                          :key="labelKey"
-                          style="flex: 50%;"
-                        >
-                          <svg t="1654529491236" class="mb-n1 icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2191" width="19" height="19"><path d="M864.554667 268.501333a42.666667 42.666667 0 0 1 0 60.330667L412.032 781.397333a42.453333 42.453333 0 0 1-22.613333 11.818667l-5.034667 0.597333H379.306667a42.496 42.496 0 0 1-27.648-12.416l-211.2-211.2a42.666667 42.666667 0 1 1 60.330666-60.330666l180.992 180.992 422.4-422.4a42.666667 42.666667 0 0 1 60.330667 0z" fill="#019501" p-id="2192"></path></svg>
-                          {{ label }}
-                        </div>
-                      </div>
-                    </v-tooltip>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PropertyDetails
+              :property="property"
+              :pckge="pckge"
+            />
           </div>
         </div>
 
-        <!-- Reviews and Price -->
-        <div class="reviews-and-price-container">
-          <div class="reviews-details">
-            <div class="reviews-image-container">
-              <img 
-                src="https://s3-alpha-sig.figma.com/img/0c15/fc3b/7a8df3ed8b4da1590034f1a754910d6c?Expires=1655078400&Signature=Fs8lePa0zJQfGZC2KTUdcuqZKAvTkSv4JF5EIX0LwadnE1jxgV5kqjpDgMYbiU8NK4lZtiNqFdeITJv8dik7a3SoggjBCCQaOHAsifuQS-mJ5cwBqzsq2xKRlQzT2~PLeeuyX2cGkqh3f-RHtYny54YdOX8qzOA8b4UyJ-JoFkLR7GAyfuM6x9G3fxr79O-Yq-IpthLZ8xpMwpvB9y~Jtt-Z6tvPK796sdxK5v9YlrQfOpAvlHfV9qNLk3fjZTM6oIHHdstE-oSaaCVPgN1RShtVilYUA-6Q8uu1MIajpX3W3hiYgLICkaBons6HhrV-t3~Q-9vbL9ZVaLEOwnL2MQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" 
-                alt="reviews-image"
-                class="reviews-image"
-              />
-            </div>
-          </div>
-          <div class="sale-display">
-            {{ displayRate(pckge) }}
-          </div>
-          <div class="light-text text-12" style="display: flex; flex-direction: row-reverse; padding-right: 1rem;">
-            Nightly avg.
-          </div>
-          <div class="price-details">
-            <div class="flex-space-between">
-              <span class="light-text text-12" style="margin-top: 9px; margin-right: 0.3rem; text-decoration: line-through" v-if="pckge.displayRate.value > pckge.adjustedDisplayRate.value">
-                SGD {{ pckge.displayRate.value }}
-              </span>
-              <h1 class="heading-h1">
-                SGD {{ pckge.adjustedDisplayRate.value }}
-              </h1>
-            </div>
-          </div>
-        </div>
+        <!-- Prices and Reviews -->
+        <PriceDetails
+          :property="property"
+          :pckge="pckge"
+        />
       </div>
     </div>
+    <EmptyDisplay v-if="!getProperties.length && !searchError" />
+    <ErrorDisplay v-if="searchError"/>
   </div>
 </template>
 <script>
 import PropertyImages from "@/components/Images/PropertyImages"
 import Button from "@/components/Buttons/Button"
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
+import eventBus from "@/plugins/event-bus"
+import ErrorDisplay from "./ErrorDisplay"
+import EmptyDisplay from "./EmptyDisplay"
+import SkeletonLoader from "./SkeletonLoader"
+import PropertyDetails from "./PropertyDetails"
+import PriceDetails from "./PriceDetails"
 
 export default {
   name: "PropertiesList",
   components: {
     PropertyImages,
-    Button
+    Button,
+    SkeletonLoader,
+    PropertyDetails,
+    PriceDetails,
+    ErrorDisplay,
+    EmptyDisplay
   },
   data() {
     return {
+      loadingProperties: false,
+      searchError: false,
+
       headerFilters: [
         {
           title: "Popularity",
@@ -149,46 +102,23 @@ export default {
   },
 
   computed: {
-    ...mapGetters("cities",[
-      "getCities"
+    ...mapGetters("cities", [
+      "getProperties"
     ])
   },
 
-  methods: {
-    displayLabel(pckge) {
-      let labels = [
-        "Breakfast",
-        "Free cancellation",
-        "Lunch",
-        "Pay later",
-        "Dinner",
-        "Pay at hotel",
-        "Half board",
-        "Full board"
-      ]
-      if(!pckge.nonRefundable) {
-        labels.splice(1, 1)
-      }
-      if(!pckge.payLater) {
-        labels.splice(3, 1)
-      }  
-      if (pckge.payAtHotel) {
-        labels.splice(5, 1)
-      }  
-      if (pckge.food) {
-        labels.splice(7, 1)
-      }
-      return labels
-    },
+  mounted() {
+    eventBus.$on("setLoading", ({searchError, isLoading}) => {
+      this.loadingProperties = isLoading
+      this.searchError = searchError
+    })
+  },
 
-    displayRate(pckge) {
-      let origRate = pckge.displayRate.value
-      let adjustedRate = pckge.adjustedDisplayRate.value
-      if(origRate > adjustedRate) {
-        let percentage = Math.round((adjustedRate * 100) / origRate)
-        return `SAVE ${percentage}% TODAY!`
-      }
-    }
+  methods: {
+    ...mapActions("cities", [
+      "autoSuggestApi",
+      "searchCityApi"
+    ])
   }
 }
 </script>
@@ -197,26 +127,6 @@ export default {
 
 .properties-list-wrapper {
   min-width: 750px;
-}
-
-.v-tooltip__content {
-  background-color: #333 !important;
-}
-
-.v-tooltip__content::before {
-  border-right: solid 8px transparent;
-  border-left: solid 8px transparent;
-  transform: translateX(-50%);
-  position: absolute;
-  z-index: -21;
-  content: '';
-  bottom: 100%;
-  left: 50%;
-  height: 0;
-  width: 0;
-}
-.v-tooltip__content::before{
-  border-bottom: solid 8px #333 !important;
 }
 
 .header-filters {
@@ -245,16 +155,6 @@ export default {
   }
 }
 
-.sale-display {
-  background-color: #00A1E5;
-  max-height: 20px;
-  font-size: 12px;
-  color: #FFF;
-  text-align: center;
-  margin: auto;
-  padding: 0 0.3rem;
-}
-
 .properties-container {
   background-color: #FFF;
   min-width: 100%;
@@ -277,40 +177,18 @@ export default {
   padding-left: 1rem;
 }
 
-.labels-box {
-  border: 1.5px solid $secondary;
-  color: $secondary;
-  padding: 0 0.3em;
-  margin-right: 0.5em;
+::v-deep .image-loader .v-skeleton-loader__button.v-skeleton-loader__bone {
+  width: 190px;
+  height: 190px;
 }
 
-.reviews-details {
-  display: flex;
-  flex-direction: row-reverse;
-  padding-right: 1rem;
+::v-deep .long-line .v-skeleton-loader__button.v-skeleton-loader__bone {
+  width: 580px;
+  height: 20px;
 }
 
-.reviews-and-price-container {
-  display: flex;
-  flex-direction: column;
-  width: 28%;
-}
-
-.reviews-image-container {
-  width: 146px;
-  height: 50.5px;
-
-  img.reviews-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.price-details {
-  padding: 0;
-  display: flex;
-  flex-direction: row-reverse;
-  padding-right: 1rem;
+::v-deep .short-line .v-skeleton-loader__button.v-skeleton-loader__bone {
+  width: 260px;
+  height: 20px;
 }
 </style>
