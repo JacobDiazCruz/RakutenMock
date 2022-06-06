@@ -9,7 +9,7 @@
     </div>
     <div class="sub-images flex-space-between mt-1">
       <div 
-        v-for="(image, imageKey) in gallery"
+        v-for="(image, imageKey) in gallery.slice(0, 4)"
         :key="imageKey"
         class="sub-image-container">
         <img 

@@ -22,6 +22,10 @@ $input: #f5f4f2;
   color: #757575;
 }
 
+.primary-text {
+  color: #002D63;
+}
+
 @mixin mobile($arg) {
   @media screen and (max-width: $arg) {
     @content;

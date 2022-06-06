@@ -147,6 +147,7 @@ export default {
   background-color: transparent;
   overflow: hidden;
   border-radius: 5px;
+  margin-bottom: 1rem;
 
   .flex-btn {
     text-align: center;

@@ -3,7 +3,7 @@
     <v-range-slider
       hide-details
       hint="Im a hint"
-      :value="[0, 1]"
+      :value="[0, 200]"
       max="400"
       min="0"
       color="#FFF"

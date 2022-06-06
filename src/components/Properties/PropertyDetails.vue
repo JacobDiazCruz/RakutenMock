@@ -1,6 +1,11 @@
 <template>
   <div class="details-container">
-    <h2 class="heading-h2">{{ property.property.name }}</h2>
+    <div class="flex-nowrap">
+      <h2 class="heading-h2">{{ property.property.name }}</h2>
+      <div class="flex-nowrap ratings-container">
+        <StarIcon v-for="i in 5" :key="i"/> 
+      </div>
+    </div>
     <div class="text-12">80 Collyer quay, Marina Bay, Singapore, Singapore, 049326 (view map)</div>
     <div class="mt-2 text-12 ellipsis">
       {{ property.property.reviews ? property.property.reviews.summary.text : "" }}
@@ -17,7 +22,7 @@
         >
           {{ label }}
         </div>
-        <div 
+        <div
           v-if="displayLabel(pckge).length > 3 "
           class="labels-box"
         >
@@ -47,8 +52,13 @@
   </div>
 </template>
 <script>
+import StarIcon from "@/components/Icons/StarIcon"
+
 export default {
   name: "PropertyDetails",
+  components: {
+    StarIcon
+  },
   props: {
     pckge: {
       type: Object,
@@ -92,11 +102,19 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/variables.scss";
 
+.details-container {
+  padding-left: 1rem;  
+}
+
 .labels-box {
   border: 1.5px solid $secondary;
   color: $secondary;
   padding: 0 0.3em;
   margin-right: 0.5em;
+}
+
+.ratings-container {
+  margin: 0.3rem 0 0 0.3rem;
 }
 
 .v-tooltip__content {

@@ -8,7 +8,12 @@
       v-for="(filter, i) in filtersList"
       :key="i"
     >  
-      <h2 class="heading-h3 mb-3">{{ filter.heading }}</h2>
+      <div class="flex-space-between">
+        <h2 class="heading-h3 mb-3">{{ filter.heading }}</h2>
+        <div class="primary-text bold text-14 cursor-pointer">
+          CLEAR
+        </div>
+      </div>
       <!----- Price filters ----->
       <PriceFilterSection 
         v-if="filter.heading == 'Price per night'"
