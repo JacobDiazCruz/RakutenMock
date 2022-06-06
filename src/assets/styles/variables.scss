@@ -16,8 +16,12 @@ $night-400: #15181c;
 $night-300: #1c1f33;
 $night-500: #000;
 $night-border: rgb(47, 51, 54);
-
 $input: #f5f4f2;
+
+// for templates
+.light-text {
+  color: #757575;
+}
 
 @mixin mobile($arg) {
   @media screen and (max-width: $arg) {

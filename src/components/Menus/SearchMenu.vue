@@ -116,7 +116,7 @@ export default {
 
     async searchCity() {
       try {
-        const response = await this.searchCityApi()
+        const response = await this.searchCityApi(this.cityCode)
         this.searchList = response.data.outlets.availability.results
       } catch(err) {
         console.log(err)
