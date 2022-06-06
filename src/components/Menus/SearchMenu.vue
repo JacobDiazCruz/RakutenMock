@@ -15,9 +15,15 @@
           class="global-autocomplete-field search-autocomplete-field"
           autocapitalize="off"
           placeholder="Singapore, Singapore"
-          :items="sampleItems"
+          :items="suggestedList"
+          item-text="label"
+          item-value="cityCode"
           v-bind="$attrs"
+          v-model="cityCode"
           append-icon=""
+          v-on.enter="searchCity"
+          @keypress="autoSuggest"
+          @change="searchCity"
           solo
           flat
         >
@@ -28,15 +34,20 @@
           </template>
           <template v-slot:item="data">
             <LocationIcon class="mr-2 mb-n1"/>
-            <div class="text-14">
-              {{ data.item }}
+            <div 
+              class="text-14" 
+            >
+              {{ data.item.label }}
             </div>
           </template>
         </v-autocomplete>
         <Button 
           type="secondary"
           class="ml-2 search-btn"
-        >Search</Button>
+          @click="searchCity"
+        >
+          Search
+        </Button>
       </div>
     </div>
   </FlexWrapper>
@@ -48,6 +59,7 @@ import AutoComplete from "@/components/Fields/AutoComplete"
 import Button from "@/components/Buttons/Button"
 import SearchIcon from "@/components/Icons/SearchIcon"
 import LocationIcon from "@/components/Icons/LocationIcon"
+import axios from "axios"
 
 export default {
   name: "TopMenu",
@@ -61,6 +73,10 @@ export default {
   },
   data() {
     return {
+      cityCode: "",
+      suggestedList: [],
+
+      // sample data
       sampleItems: [
         'qwrqwr', 'qwrqwr', 'gsdgsdg'
       ],
@@ -78,6 +94,41 @@ export default {
           title: "Log out"
         }
       ]
+    }
+  },
+
+  methods: {
+    async autoSuggest() {
+      try {
+        const headers = {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+        }
+        const res = await axios({
+          method: "GET",
+          url: `https://heroku-newsletter-service.herokuapp.com/autosuggest`,
+          headers: headers
+        })
+        console.log(res.data)
+        this.suggestedList = res.data
+      } catch(err) {
+        console.log(err)
+      }
+    },
+
+    async searchCity() {
+      try {
+        const res = await axios({
+          method: "GET",
+          url: `https://heroku-newsletter-service.herokuapp.com/search/${this.cityCode}`,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+          }
+        })
+      } catch(err) {
+        console.log(err)
+      }
     }
   }
 }
