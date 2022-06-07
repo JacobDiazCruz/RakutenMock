@@ -23,11 +23,13 @@
 <script>
 import MainLogo from "@/components/Icons/MainLogo"
 import FlexWrapper from "@/components/Wrappers/FlexWrapper"
+import Button from "@/components/Buttons/Button"
 
 export default {
   name: "TopMenu",
   components: {
     MainLogo,
+    Button,
     FlexWrapper
   },
   data() {

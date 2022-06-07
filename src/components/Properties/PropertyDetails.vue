@@ -75,7 +75,7 @@ export default {
   methods: {
     /**
      * @description set display label based on filtered object keys
-     * @return filtered labels 
+     * @return <Array>: filtered labels
      * @status Done 
      */
     displayLabel(pckge) {

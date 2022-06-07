@@ -25,11 +25,11 @@
     <!----- Properties list ----->
     <div
       class="properties-container flex-space-between"
-      v-for="(property, i) in getProperties"
+      v-for="(propertyData, i) in getProperties"
       :key="i"
     >
       <div
-        v-for="(pckge, pckgeKey) in property.packages"
+        v-for="(pckge, pckgeKey) in propertyData.packages"
         :key="pckgeKey"
         class="flex-space-between properties-row"
       >
@@ -37,24 +37,22 @@
         <div>
           <div class="property-details flex-nowrap">
             <PropertyImages
-              :heroImage="property.property.heroImage.url"
-              :gallery="property.property.gallery"
+              :heroImage="propertyData.property.heroImage.url"
+              :gallery="propertyData.property.gallery"
             />
             <PropertyDetails
-              :property="property"
+              :property="propertyData"
               :pckge="pckge"
             />
           </div>
         </div>
-
         <!----- Prices and Reviews ----->
         <PriceDetails
-          :property="property"
+          :property="propertyData"
           :pckge="pckge"
         />
       </div>
     </div>
-
     <!----- Empty and Error messages ----->
     <EmptyDisplay v-if="!getProperties.length && !searchError" />
     <ErrorDisplay v-if="searchError"/>

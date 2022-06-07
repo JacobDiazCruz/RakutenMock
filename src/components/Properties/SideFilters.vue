@@ -36,7 +36,7 @@
             :label="item.title"
             v-model="item.selected"
           ></v-checkbox>
-          <p>{{ item.value }}</p>
+          <div class="text-12 mt-1">{{ item.value }}</div>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@ import PriceFilterSection from "@/components/Sections/PriceFilterSection"
 import SearchFilterSection from "@/components/Sections/SearchFilterSection"
 
 export default {
-  name: "FiltersRow",
+  name: "SideFilters",
   components: {
     CardGroup,
     TextField,
@@ -75,7 +75,7 @@ export default {
           heading: "Reviews",
           items: [
             {
-              selected: false,
+              selected: true,
               title: "Excellent",
               value: 999
             },
@@ -111,7 +111,7 @@ export default {
           heading: "Star rating",
           items: [
             {
-              selected: false,
+              selected: true,
               title: "5",
               value: 999
             },
@@ -233,6 +233,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import "@/assets/styles/variables.scss";
+
 .filters-row {
   margin-right: 1em;
 }
@@ -251,5 +253,10 @@ export default {
   .v-messages {
     min-height: 0px;
   }
+}
+
+::v-deep label.v-label.theme--light {
+  font-size: 0.75rem !important;
+  color: $dark-gray;
 }
 </style>

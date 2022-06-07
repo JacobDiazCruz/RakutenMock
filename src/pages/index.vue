@@ -1,21 +1,21 @@
 <template>
-  <PageWrapper backgroundColor="#F5F5F5">
+  <PageWrapper>
     <div class="home-container flex-nowrap">
-      <FiltersRow/>
+      <SideFilters/>
       <Properties/>
     </div>
   </PageWrapper>
 </template>
 <script>
 import PageWrapper from "@/components/Wrappers/PageWrapper"
-import FiltersRow from "@/components/Rows/FiltersRow"
+import SideFilters from "@/components/Properties/SideFilters"
 import Properties from "@/components/Properties"
 
 export default {
   name: "Home",
   components: {
     PageWrapper,
-    FiltersRow,
+    SideFilters,
     Properties
   }
 }

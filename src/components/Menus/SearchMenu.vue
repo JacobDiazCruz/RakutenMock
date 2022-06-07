@@ -18,6 +18,7 @@
           :items="suggestedList"
           item-text="label"
           return-object
+          :loading="loadingField"
           v-bind="$attrs"
           v-model="cityCode"
           append-icon=""
@@ -34,9 +35,7 @@
           </template>
           <template v-slot:item="data">
             <LocationIcon class="mr-2 mb-n1"/>
-            <div 
-              class="text-14" 
-            >
+            <div class="text-14">
               {{ data.item.label }}
             </div>
           </template>
@@ -59,8 +58,8 @@ import AutoComplete from "@/components/Fields/AutoComplete"
 import Button from "@/components/Buttons/Button"
 import SearchIcon from "@/components/Icons/SearchIcon"
 import LocationIcon from "@/components/Icons/LocationIcon"
-import { mapActions } from "vuex"
 import eventBus from "@/plugins/event-bus"
+import { mapActions } from "vuex"
 
 export default {
   name: "TopMenu",
@@ -76,6 +75,7 @@ export default {
   data() {
     return {
       cityCode: "",
+      loadingField: false,
       suggestedList: [],
       searchList: []
     }
@@ -87,12 +87,20 @@ export default {
       "searchPropertiesApi"
     ]),
 
+    /**
+     * @description triggers upon user keypress on search field
+     * @return N/A
+     * @status Done 
+     */
     async autoSuggest() {
+      this.loadingField = true
       try {
         const response = await this.autoSuggestApi()
         this.suggestedList = response.data
       } catch(err) {
         console.log(err)
+      } finally {
+        this.loadingField = false
       }
     },
 
@@ -179,5 +187,10 @@ export default {
   .v-messages {
     min-height: 0px !important;
   }
+}
+
+::v-deep .v-progress-linear.v-progress-linear--absolute.v-progress-linear--visible.theme--light {
+  background-color: $secondary !important;
+  border-color: $secondary !important; 
 }
 </style>

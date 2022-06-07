@@ -24,27 +24,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  color: $dark !important;
-}
-
-.night-text {
-  color: #FFF !important;
 }
 
 .v-application p {
   line-height: 1.5;
-  font-size: 14px;
   padding: 0;
   margin: 0;
-}
-
-.v-application ul {
-  padding: 0;
-  margin: 0;
-}
-
-p.description {
-  font-size: 13px;
 }
 
 .hide-mobile {
@@ -58,41 +43,4 @@ p.description {
   @include mobile(999px) {
     display: inline !important;
   }
-}
-
-// VUETIFY OVERRIDE
-.global-textarea-field {
-  margin-top: 10px !important;
-  textarea {
-    width: 100% !important;
-    height: 170px !important;
-    background-color: #f2f3f5 !important;
-    border-radius: 4px !important;
-    padding: 10px 10px;
-  }
-}
-
-.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)>.v-input__control>.v-input__slot {
-  padding: 0;
-}
-
-.theme--light.v-application {
-  color: #2b2a35;
-}
-
-.post-profile-details__image-wrapper {
-  width: 40px;
-  height: 40px;
-  position: relative;
-}
-
-// Global inheritance
-.break-words {
-  word-wrap: break-word!important;
-  word-break: break-word!important;
-}
-
-.text-left {
-  text-align: left;
-  font-size: 14px;
 }
